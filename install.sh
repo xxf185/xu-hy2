@@ -151,18 +151,18 @@ show_menu() {
     check_status
     S_RES=$?
     echo -e ""
-    echo -e "${PURPLE}==================Hysteria 2============================${PLAIN}"
+    echo -e "---------------Hysteria 2---------------"
     echo -e ""
     if [ $S_RES -eq 0 ]; then echo -e " 状态: ${GREEN}运行中${PLAIN}"
     elif [ $S_RES -eq 1 ]; then echo -e " 状态: ${RED}已停止${PLAIN}"
     else echo -e " 状态: ${YELLOW}未安装${PLAIN}"; fi
-    echo -e "${PURPLE}----------------------------------------------${PLAIN}"
+    echo -e ""
     echo -e " 1. 安装 Hysteria 2"
     echo -e " 2. 查看配置信息"
     echo -e " 3. 启动服务      4. 停止服务"
     echo -e " 5. 重启服务      6. 开启 BBR 加速"
     echo -e " 7. 卸载脚本      0. 退出"
-    echo -e "${PURPLE}----------------------------------------------${PLAIN}"
+    echo -e ""
     read -p "选择 [0-7]: " num
     case "$num" in
         1) install_hy2 ;;
