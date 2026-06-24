@@ -108,7 +108,7 @@ EOF
     if [[ "$OS" == "alpine" ]]; then
         cat <<EOF > /etc/init.d/hysteria
 #!/sbin/openrc-run
-name="Hysteria2"
+name="hy2"
 command="$BIN_FILE"
 command_args="server -c $CONF_FILE"
 command_background="yes"
@@ -123,7 +123,6 @@ EOF
         systemctl enable hysteria-server
         systemctl restart hysteria-server
     fi
-
     show_link
 }
 
