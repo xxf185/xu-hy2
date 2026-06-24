@@ -109,7 +109,7 @@ EOF
     if [[ "$OS" == "alpine" ]]; then
         cat <<EOF > /etc/init.d/hysteria
 #!/sbin/openrc-run
-name="Hysteria 2"
+name="Hysteria2"
 command="$BIN_FILE"
 command_args="server -c $CONF_FILE"
 command_background="yes"
@@ -125,9 +125,6 @@ EOF
         systemctl restart hysteria-server
     fi
 
-    ln -sf "$(realpath "$0")" /usr/bin/hy2
-    chmod +x /usr/bin/hy2
-    echo -e "${hy2}安装完成！输入 hy2 管理。${PLAIN}"
     show_link
 }
 
