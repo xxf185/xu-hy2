@@ -150,9 +150,9 @@ show_menu() {
     clear
     check_status
     S_RES=$?
-    echo -e "${PURPLE}==============================================${PLAIN}"
-    echo -e "${CYAN}    Hysteria 2 全平台管理脚本 (V5.0)    ${PLAIN}"
-    echo -e "${BLUE} 系统: ${GREEN}$OS${PLAIN}  架构: ${GREEN}$(uname -m)${PLAIN}"
+    echo -e ""
+    echo -e "${PURPLE}==================Hysteria 2============================${PLAIN}"
+    echo -e ""
     if [ $S_RES -eq 0 ]; then echo -e " 状态: ${GREEN}运行中${PLAIN}"
     elif [ $S_RES -eq 1 ]; then echo -e " 状态: ${RED}已停止${PLAIN}"
     else echo -e " 状态: ${YELLOW}未安装${PLAIN}"; fi
