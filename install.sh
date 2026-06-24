@@ -109,7 +109,7 @@ EOF
     if [[ "$OS" == "alpine" ]]; then
         cat <<EOF > /etc/init.d/hysteria
 #!/sbin/openrc-run
-name="hy2"
+name="Hysteria 2"
 command="$BIN_FILE"
 command_args="server -c $CONF_FILE"
 command_background="yes"
@@ -156,7 +156,7 @@ show_menu() {
     S_RES=$?
     echo -e ""
     echo -e "${YELLOW}--------------------Hysteria 2------------------${PLAIN}"
-    echo -e "${YELLOW}     全平台管理脚本 (V5.0)    ${PLAIN}"
+    echo -e ""
     echo -e "${YELLOW} 系统: ${GREEN}$OS${PLAIN}  架构: ${GREEN}$(uname -m)${PLAIN}"
     if [ $S_RES -eq 0 ]; then echo -e " 状态: ${GREEN}运行中${PLAIN}"
     elif [ $S_RES -eq 1 ]; then echo -e " 状态: ${RED}已停止${PLAIN}"
