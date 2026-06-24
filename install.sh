@@ -61,7 +61,7 @@ enable_bbr() {
         echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
         echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
         sysctl -p
-        echo -e "${GREEN}BBR 开启成功！${PLAIN}"
+        echo -e "${YELLOW}BBR 开启成功！${PLAIN}"
     fi
     read -p "按回车返回..."
 }
@@ -109,7 +109,7 @@ EOF
     if [[ "$OS" == "alpine" ]]; then
         cat <<EOF > /etc/init.d/hysteria
 #!/sbin/openrc-run
-name="Hysteria2"
+name="hy2"
 command="$BIN_FILE"
 command_args="server -c $CONF_FILE"
 command_background="yes"
@@ -127,7 +127,7 @@ EOF
 
     ln -sf "$(realpath "$0")" /usr/bin/hy2
     chmod +x /usr/bin/hy2
-    echo -e "${GREEN}安装完成！输入 hy2 管理。${PLAIN}"
+    echo -e "${hy2}安装完成！输入 hy2 管理。${PLAIN}"
     show_link
 }
 
@@ -136,12 +136,16 @@ show_link() {
     IP=$(curl -s4 https://api.ipify.org || echo "你的IP")
     PW=$(grep 'password:' $CONF_FILE | awk '{print $2}' | tr -d '"')
     PT=$(grep 'listen:' $CONF_FILE | awk -F: '{print $NF}')
-    URL="hysteria2://${PW}@${IP}:${PT}/?insecure=1&sni=bing.com#Hy2_Universal"
-    echo -e "\n${YELLOW}========== 配置信息 ==========${PLAIN}"
+    URL="hysteria2://${PW}@${IP}:${PT}/?insecure=1&sni=bing.com#hy2"
+    echo -e ""
+    echo -e "----------配置信息----------"
+    echo -e ""
     echo -e "地址: ${YELLOW}${IP}:${PT}${PLAIN}"
     echo -e "密码: ${YELLOW}${PW}${PLAIN}"
-    echo -e "链接: ${YELLOW}${URL}${PLAIN}"
-    echo -e "${YELLOW}==============================${PLAIN}"
+    echo -e ""
+    echo -e "------------链接------------"
+    echo -e ""
+    echo -e "${YELLOW}${URL}${PLAIN}"
     read -p "按回车返回..."
 }
 
@@ -150,20 +154,21 @@ show_menu() {
     clear
     check_status
     S_RES=$?
-    echo -e "${YELLOW}==============================================${PLAIN}"
-    echo -e "${YELLOW}    Hysteria 2 全平台管理脚本 (V5.0)    ${PLAIN}"
-    echo -e "${BLUE} 系统: ${GREEN}$OS${PLAIN}  架构: ${GREEN}$(uname -m)${PLAIN}"
+    echo -e ""
+    echo -e "${YELLOW}--------------------Hysteria 2------------------${PLAIN}"
+    echo -e "${YELLOW}     全平台管理脚本 (V5.0)    ${PLAIN}"
+    echo -e "${YELLOW} 系统: ${GREEN}$OS${PLAIN}  架构: ${GREEN}$(uname -m)${PLAIN}"
     if [ $S_RES -eq 0 ]; then echo -e " 状态: ${GREEN}运行中${PLAIN}"
     elif [ $S_RES -eq 1 ]; then echo -e " 状态: ${RED}已停止${PLAIN}"
     else echo -e " 状态: ${YELLOW}未安装${PLAIN}"; fi
-    echo -e "${YELLOW}----------------------------------------------${PLAIN}"
+    echo -e ""
     echo -e " 1. 安装 Hysteria 2"
     echo -e " 2. 查看配置信息"
     echo -e " 3. 启动服务      4. 停止服务"
     echo -e " 5. 重启服务      6. 开启 BBR 加速"
     echo -e " 7. 卸载脚本      0. 退出"
-    echo -e "${YELLOW}----------------------------------------------${PLAIN}"
-    read -p "选择 [0-7]: " num
+    echo -e ""
+    read -p "选项 [0-7]: " num
     case "$num" in
         1) install_hy2 ;;
         2) show_link ;;
