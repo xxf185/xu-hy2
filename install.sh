@@ -80,7 +80,7 @@ install_hy2() {
         chmod +x $BIN_FILE
     else
         # 其他系统使用官方脚本
-        bash <(curl -fsSL https://get.hy2.sh/)
+        bash <(curl -fsSL https://raw.githubusercontent.com/xxf185/hysteria/refs/heads/master/install_server.sh)
     fi
 
     mkdir -p /etc/hysteria
