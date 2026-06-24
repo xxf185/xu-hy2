@@ -63,7 +63,6 @@ enable_bbr() {
         sysctl -p
         echo -e "${YELLOW}BBR 开启成功！${PLAIN}"
     fi
-    read -p "按回车返回..."
 }
 
 # 5. 安装 Hysteria 2
@@ -143,8 +142,7 @@ show_link() {
     echo -e "------------链接------------"
     echo -e ""
     echo -e "${YELLOW}${URL}${PLAIN}"
-    read -p "按回车返回..."
-show_menu
+    echo -e ""
 }
 
 # 7. 主菜单
