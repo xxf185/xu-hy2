@@ -69,18 +69,18 @@ enable_bbr() {
 # 5. 安装 Hysteria 2
 install_hy2() {
     install_deps
-    read -p "请输入服务监听端口 [默认 15847]: " PORT
-    [ -z "${PORT}" ] && PORT="15847"
+    read -p "请输入服务监听端口 [默认 443]: " PORT
+    [ -z "${PORT}" ] && PORT="443"
 
     if [[ "$OS" == "alpine" ]]; then
         # Alpine 二进制安装
         ARCH=$(uname -m)
         [ "$ARCH" = "x86_64" ] && BINARY="hysteria-linux-amd64" || BINARY="hysteria-linux-arm64"
-        curl -L -o $BIN_FILE "https://github.com/xxf185/hysteria/releases/latest/download/${BINARY}"
+        curl -L -o $BIN_FILE "https://github.com/apernet/hysteria/releases/latest/download/${BINARY}"
         chmod +x $BIN_FILE
     else
         # 其他系统使用官方脚本
-        bash <(curl -fsSL https://raw.githubusercontent.com/xxf185/hysteria/refs/heads/master/install_server.sh)
+        bash <(curl -fsSL https://get.hy2.sh/)
     fi
 
     mkdir -p /etc/hysteria
@@ -136,12 +136,13 @@ show_link() {
     IP=$(curl -s4 https://api.ipify.org || echo "你的IP")
     PW=$(grep 'password:' $CONF_FILE | awk '{print $2}' | tr -d '"')
     PT=$(grep 'listen:' $CONF_FILE | awk -F: '{print $NF}')
-    URL="hysteria2://${PW}@${IP}:${PT}/?insecure=1&sni=bing.com#hy2"
-    echo -e ""
-    echo -e "----------链接----------"
-    echo -e ""
-    echo -e "${URL}"
-    read -p ""
+    URL="hysteria2://${PW}@${IP}:${PT}/?insecure=1&sni=bing.com#Hy2_Universal"
+    echo -e "\n${BLUE}========== 配置信息 ==========${PLAIN}"
+    echo -e "地址: ${GREEN}${IP}:${PT}${PLAIN}"
+    echo -e "密码: ${GREEN}${PW}${PLAIN}"
+    echo -e "链接: ${YELLOW}${URL}${PLAIN}"
+    echo -e "${BLUE}==============================${PLAIN}"
+    read -p "按回车返回..."
 }
 
 # 7. 主菜单
@@ -149,22 +150,20 @@ show_menu() {
     clear
     check_status
     S_RES=$?
-    echo -e ""
-    echo -e "---------------Hysteria 2---------------"
-    echo -e ""
+    echo -e "${PURPLE}==============================================${PLAIN}"
+    echo -e "${CYAN}    Hysteria 2 全平台管理脚本 (V5.0)    ${PLAIN}"
+    echo -e "${BLUE} 系统: ${GREEN}$OS${PLAIN}  架构: ${GREEN}$(uname -m)${PLAIN}"
     if [ $S_RES -eq 0 ]; then echo -e " 状态: ${GREEN}运行中${PLAIN}"
     elif [ $S_RES -eq 1 ]; then echo -e " 状态: ${RED}已停止${PLAIN}"
     else echo -e " 状态: ${YELLOW}未安装${PLAIN}"; fi
-    echo -e ""
+    echo -e "${PURPLE}----------------------------------------------${PLAIN}"
     echo -e " 1. 安装 Hysteria 2"
-    echo -e " 2. 查看配置"
-    echo -e " 3. 启动服务"
-    echo -e " 4. 停止服务"
-    echo -e " 5. 重启服务"
-    echo -e " 6. 开启 BBR 加速"
-    echo -e " 7. 卸载脚本"
-    echo -e " 0. 退出"
-    read -p " 选项 [0-7]: " num
+    echo -e " 2. 查看配置信息"
+    echo -e " 3. 启动服务      4. 停止服务"
+    echo -e " 5. 重启服务      6. 开启 BBR 加速"
+    echo -e " 7. 卸载脚本      0. 退出"
+    echo -e "${PURPLE}----------------------------------------------${PLAIN}"
+    read -p "选择 [0-7]: " num
     case "$num" in
         1) install_hy2 ;;
         2) show_link ;;
