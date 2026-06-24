@@ -76,7 +76,7 @@ install_hy2() {
         # Alpine 二进制安装
         ARCH=$(uname -m)
         [ "$ARCH" = "x86_64" ] && BINARY="hysteria-linux-amd64" || BINARY="hysteria-linux-arm64"
-        curl -L -o $BIN_FILE "https://github.com/apernet/hysteria/releases/latest/download/${BINARY}"
+        curl -L -o $BIN_FILE "https://github.com/xxf185/hysteria/releases/latest/download/${BINARY}"
         chmod +x $BIN_FILE
     else
         # 其他系统使用官方脚本
@@ -136,7 +136,7 @@ show_link() {
     IP=$(curl -s4 https://api.ipify.org || echo "你的IP")
     PW=$(grep 'password:' $CONF_FILE | awk '{print $2}' | tr -d '"')
     PT=$(grep 'listen:' $CONF_FILE | awk -F: '{print $NF}')
-    URL="hysteria2://${PW}@${IP}:${PT}/?insecure=1&sni=bing.com#Hy2_Universal"
+    URL="hysteria2://${PW}@${IP}:${PT}/?insecure=1&sni=bing.com#hy2"
     echo -e "\n${BLUE}========== 配置信息 ==========${PLAIN}"
     echo -e "地址: ${GREEN}${IP}:${PT}${PLAIN}"
     echo -e "密码: ${GREEN}${PW}${PLAIN}"
