@@ -137,11 +137,11 @@ show_link() {
     PW=$(grep 'password:' $CONF_FILE | awk '{print $2}' | tr -d '"')
     PT=$(grep 'listen:' $CONF_FILE | awk -F: '{print $NF}')
     URL="hysteria2://${PW}@${IP}:${PT}/?insecure=1&sni=bing.com#Hy2_Universal"
-    echo -e "\n${BLUE}========== 配置信息 ==========${PLAIN}"
-    echo -e "地址: ${GREEN}${IP}:${PT}${PLAIN}"
-    echo -e "密码: ${GREEN}${PW}${PLAIN}"
+    echo -e "\n${YELLOW}========== 配置信息 ==========${PLAIN}"
+    echo -e "地址: ${YELLOW}${IP}:${PT}${PLAIN}"
+    echo -e "密码: ${YELLOW}${PW}${PLAIN}"
     echo -e "链接: ${YELLOW}${URL}${PLAIN}"
-    echo -e "${BLUE}==============================${PLAIN}"
+    echo -e "${YELLOW}==============================${PLAIN}"
     read -p "按回车返回..."
 }
 
@@ -150,19 +150,19 @@ show_menu() {
     clear
     check_status
     S_RES=$?
-    echo -e "${PURPLE}==============================================${PLAIN}"
-    echo -e "${CYAN}    Hysteria 2 全平台管理脚本 (V5.0)    ${PLAIN}"
+    echo -e "${YELLOW}==============================================${PLAIN}"
+    echo -e "${YELLOW}    Hysteria 2 全平台管理脚本 (V5.0)    ${PLAIN}"
     echo -e "${BLUE} 系统: ${GREEN}$OS${PLAIN}  架构: ${GREEN}$(uname -m)${PLAIN}"
     if [ $S_RES -eq 0 ]; then echo -e " 状态: ${GREEN}运行中${PLAIN}"
     elif [ $S_RES -eq 1 ]; then echo -e " 状态: ${RED}已停止${PLAIN}"
     else echo -e " 状态: ${YELLOW}未安装${PLAIN}"; fi
-    echo -e "${PURPLE}----------------------------------------------${PLAIN}"
+    echo -e "${YELLOW}----------------------------------------------${PLAIN}"
     echo -e " 1. 安装 Hysteria 2"
     echo -e " 2. 查看配置信息"
     echo -e " 3. 启动服务      4. 停止服务"
     echo -e " 5. 重启服务      6. 开启 BBR 加速"
     echo -e " 7. 卸载脚本      0. 退出"
-    echo -e "${PURPLE}----------------------------------------------${PLAIN}"
+    echo -e "${YELLOW}----------------------------------------------${PLAIN}"
     read -p "选择 [0-7]: " num
     case "$num" in
         1) install_hy2 ;;
