@@ -76,11 +76,11 @@ install_hy2() {
         # Alpine 二进制安装
         ARCH=$(uname -m)
         [ "$ARCH" = "x86_64" ] && BINARY="hysteria-linux-amd64" || BINARY="hysteria-linux-arm64"
-        curl -L -o $BIN_FILE "https://github.com/apernet/hysteria/releases/latest/download/${BINARY}"
+        curl -L -o $BIN_FILE "https://github.com/xxf185/hysteria/releases/latest/download/${BINARY}"
         chmod +x $BIN_FILE
     else
         # 其他系统使用官方脚本
-        bash <(curl -fsSL https://get.hy2.sh/)
+        bash <(curl -fsSL https://raw.githubusercontent.com/xxf185/hysteria/refs/heads/master/install_server.sh)
     fi
 
     mkdir -p /etc/hysteria
