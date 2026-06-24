@@ -125,7 +125,7 @@ EOF
         systemctl restart hysteria-server
     fi
 
-    show_link
+show_link
 }
 
 # 6. 显示配置
@@ -144,6 +144,7 @@ show_link() {
     echo -e ""
     echo -e "${YELLOW}${URL}${PLAIN}"
     read -p "按回车返回..."
+show_menu
 }
 
 # 7. 主菜单
