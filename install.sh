@@ -69,8 +69,8 @@ enable_bbr() {
 # 5. 安装 Hysteria 2
 install_hy2() {
     install_deps
-    read -p "请输入服务监听端口 [默认 443]: " PORT
-    [ -z "${PORT}" ] && PORT="443"
+    read -p "请输入服务监听端口 [默认 15847]: " PORT
+    [ -z "${PORT}" ] && PORT="15847"
 
     if [[ "$OS" == "alpine" ]]; then
         # Alpine 二进制安装
@@ -137,12 +137,11 @@ show_link() {
     PW=$(grep 'password:' $CONF_FILE | awk '{print $2}' | tr -d '"')
     PT=$(grep 'listen:' $CONF_FILE | awk -F: '{print $NF}')
     URL="hysteria2://${PW}@${IP}:${PT}/?insecure=1&sni=bing.com#hy2"
-    echo -e "\n${BLUE}========== 配置信息 ==========${PLAIN}"
-    echo -e "地址: ${GREEN}${IP}:${PT}${PLAIN}"
-    echo -e "密码: ${GREEN}${PW}${PLAIN}"
-    echo -e "链接: ${YELLOW}${URL}${PLAIN}"
-    echo -e "${BLUE}==============================${PLAIN}"
-    read -p "按回车返回..."
+    echo -e ""
+    echo -e "----------链接----------"
+    echo -e ""
+    echo -e "${URL}"
+    read -p ""
 }
 
 # 7. 主菜单
@@ -158,12 +157,14 @@ show_menu() {
     else echo -e " 状态: ${YELLOW}未安装${PLAIN}"; fi
     echo -e ""
     echo -e " 1. 安装 Hysteria 2"
-    echo -e " 2. 查看配置信息"
-    echo -e " 3. 启动服务      4. 停止服务"
-    echo -e " 5. 重启服务      6. 开启 BBR 加速"
-    echo -e " 7. 卸载脚本      0. 退出"
-    echo -e ""
-    read -p "选择 [0-7]: " num
+    echo -e " 2. 查看配置"
+    echo -e " 3. 启动服务"
+    echo -e " 4. 停止服务"
+    echo -e " 5. 重启服务"
+    echo -e " 6. 开启 BBR 加速"
+    echo -e " 7. 卸载脚本"
+    echo -e " 0. 退出"
+    read -p " 选项 [0-7]: " num
     case "$num" in
         1) install_hy2 ;;
         2) show_link ;;
