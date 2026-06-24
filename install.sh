@@ -125,7 +125,7 @@ EOF
         systemctl restart hysteria-server
     fi
 
-show_link
+    show_link
 }
 
 # 6. 显示配置
