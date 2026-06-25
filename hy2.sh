@@ -1,5 +1,5 @@
-#!/usr/bin/env bash
-set -e
+#!/bin/bash
+
 
 ### ===== 配置参数 =====
 SERVER_NAME="www.bing.com"
