@@ -110,7 +110,7 @@ install_hy2() {
     esac
 
     echo -e "${YELLOW}▶ 下载 Hysteria2...${NC}"
-    curl -L -o "$BIN" "https://github.com/apernet/hysteria/releases/latest/download/$FILE"
+    curl -L -o "$BIN" "https://github.com/xxf185/hysteria/releases/latest/download/$FILE"
     chmod +x "$BIN"
 
     PASSWORD=$(openssl rand -hex 4)
